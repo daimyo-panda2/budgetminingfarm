@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Mining Farm</title>
+  <style>
+    body { background:black; color:#00ff00; font-family:monospace; }
+    #log {
+      border:1px solid #00ff00;
+      height:250px; width:500px;
+      overflow-y:auto; padding:5px; white-space:pre-wrap;
+    }
+    #input {
+      width:500px; background:black; color:#00ff00;
+      border:1px solid #00ff00; padding:4px;
+    }
+  </style>
+</head>
+<body>
+  <h2>💻 Simple Mining Farm</h2>
+  <div id="log"></div>
+  <input id="input" placeholder="Type: mine / buyrig / status">
+
+  <script>
+    let coins = 0;
+    let rigs = [];
+
+    const gpus = [
+      {name:"RTX 3090", rate:25, cost:30},
+      {name:"RTX 4090", rate:50, cost:60},
+      {name:"RTX 5090", rate:120, cost:120}
+    ];
+
+    const logBox = document.getElementById("log");
+    const input = document.getElementById("input");
+
+    function log(msg){
+      logBox.innerHTML += msg + "\n";
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function status(){
+      let hash = rigs.reduce((s,r)=>s+r.rate,0);
+      log(`Coins: ${coins.toFixed(1)} | Rigs: ${rigs.length} | Hash: ${hash} MH/s`);
+    }
+
+    function mine(){
+      coins += 1;
+      log("You mined 1 CoinX!");
+    }
+
+    function buyrig(){
+      const gpu = gpus[Math.floor(Math.random()*gpus.length)];
+      if(coins >= gpu.cost){
+        coins -= gpu.cost;
+        rigs.push(gpu);
+        log(`Bought ${gpu.name} (${gpu.rate} MH/s) for ${gpu.cost} CoinX`);
+      } else log(`Need ${gpu.cost} CoinX for ${gpu.name}`);
+    }
+
+    function cmd(text){
+      text = text.trim().toLowerCase();
+      if(text=="mine"||text=="m") mine();
+      else if(text=="buyrig"||text=="br") buyrig();
+      else if(text=="status"||text=="s") status();
+      else log("Unknown command");
+      status();
+    }
+
+    setInterval(()=>{
+      if(rigs.length){
+        let mined = rigs.reduce((s,r)=>s+r.rate,0)*0.01;
+        coins += mined;
+        log(`Rigs mined ${mined.toFixed(1)} CoinX`);
+        status();
+      }
+    },3000);
+
+    input.addEventListener("keydown",e=>{
+      if(e.key=="Enter"){ cmd(input.value); input.value=""; }
+    });
+
+    log("Welcome! Commands: mine / buyrig / status");
+  </script>
+</body>
+</html>
