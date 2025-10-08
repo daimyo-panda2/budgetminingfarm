@@ -18,7 +18,7 @@
 <body>
   <h2>Budget Mining Farm</h2>
   <div id="log"></div>
-  <input id="input" placeholder="Type: mine / buyrig / status">
+  <input id="input" placeholder="Commands go here:)">
 
   <script>
     let coins = 10;
@@ -40,24 +40,24 @@
       log(`Coins: ${coins} | Rigs: ${rigs}`);
     }
 
-    function mine(){
+    function chores(){
       coins += 1;
-      log("You mined 1 coin!");
+      log("You earned 1 coin!");
     }
 
     function buyrig(){
       if(coins >= 10){
         coins -= 10;
         rigs += 1;
-        log("You bought 1 rig!");
+        log("You bought 1 Basic ASIC!");
       } else {
-        log("Not enough coins to buy a rig (need 10).");
+        log("Not enough coins to buy anothe rig (need 10).");
       }
     }
 
     function cmd(text){
       text = text.trim().toLowerCase();
-      if(text == "mine") mine();
+      if(text == "chores") chores();
       else if(text == "buyrig") buyrig();
       else if(text == "status") status();
       else log("Unknown command");
@@ -79,8 +79,10 @@
       }
     });
 
-    log("Welcome! Commands: mine / buyrig / status");
+    log("Welcome! Commands: chores / buyrig / status");
+    sleep(1)
     log("Welcome to your virtual mining farm! To get you started, type \"do chores\" to earn coins, \"buyrig\" to purchase a mining rig for 10 coins, and \"status\" to check your current coins and rigs. Happy mining!");
+    sleep(1)
     log("Here, I just gave you 10 coins to get started. Type \"status to see your balance.")
   </script>
 </body>
