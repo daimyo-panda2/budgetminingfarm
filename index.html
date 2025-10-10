@@ -36,6 +36,14 @@
         if(atBottom) logBox.scrollTop = logBox.scrollHeight;
     }
 
+     function log2(msg){
+        const atBottom = logBox.scrollTop + logBox.clientHeight + 10 >= logBox.scrollHeight;
+        const line = document.createElement('div');
+        line.textContent = msg;
+        logBox.appendChild(line);
+        if(atBottom) logBox.scrollTop = logBox.scrollHeight;
+    }
+
     function status(){
       log(`Coins: ${coins} | Rigs: ${rigs}`);
     }
