@@ -13,12 +13,22 @@
       width:500px; background:black; color:#d35d2f;
       border:1px solid #00ff00; padding:4px;
     }
+      #log2 {
+        border: 5px solid #2196f3;
+        background: #222a38;
+        color: #aeefff;
+        height: fit-content(60%); width:fit-content(80%);
+        overflow-y: auto; padding: 5px; white-space: pre-wrap;
+        margin-top: 15px;
+      }
   </style>
 </head>
 <body>
   <h2>Budget Mining Farm</h2>
   <div id="log"></div>
   <input id="input" placeholder="Commands go here:)">
+
+    <div id="log2"></div>
 
   <script>
     let coins = 10;
@@ -28,12 +38,22 @@
     const cmdLogBox = document.getElementById("cmdlog")
     const input = document.getElementById("input");
 
+    const logBox2 = document.getElementById("log2");
+
     function log(msg){
         const atBottom = logBox.scrollTop + logBox.clientHeight + 10 >= logBox.scrollHeight;
         const line = document.createElement('div');
         line.textContent = msg;
         logBox.appendChild(line);
         if(atBottom) logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function log2(msg){
+      const atBottom = logBox2.scrollTop + logBox2.clientHeight + 10 >= logBox2.scrollHeight;
+      const line = document.createElement('div');
+      line.textContent = msg;
+      logBox2.appendChild(line);
+      if(atBottom) logBox2.scrollTop = logBox2.scrollHeight;
     }
 
     function status(){
