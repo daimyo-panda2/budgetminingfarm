@@ -102,6 +102,20 @@
     log("Welcome! Commands: chores / buyrig / status");
     log("Welcome to your virtual mining farm! To get you started, type \"do chores\" to earn coins, \"buyrig\" to purchase a mining rig for 10 coins, and \"status\" to check your current coins and rigs. Happy mining!");
     log("Here, I just gave you 10 coins to get started. Type \"status to see your balance.")
+      // Show welcome messages with delay
+      async function showWelcomeMessages() {
+        log("Welcome! Commands: chores / buyrig / status");
+        await wait(1000);
+        log("Welcome to your virtual mining farm! To get you started, type \"do chores\" to earn coins, \"buyrig\" to purchase a mining rig for 10 coins, and \"status\" to check your current coins and rigs. Happy mining!");
+        await wait(1000);
+        log("Here, I just gave you 10 coins to get started. Type \"status to see your balance.");
+      }
+
+      function wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      showWelcomeMessages();
   </script>
 </body>
 </html>
